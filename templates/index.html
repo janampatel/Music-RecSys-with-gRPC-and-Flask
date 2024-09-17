@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Recommendation Service</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Music Recommendation Service</h1>
+        
+        <section>
+            <h2>Create a New Recommendation</h2>
+            <form action="/create" method="POST">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="artist">Artist:</label>
+                <input type="text" id="artist" name="artist" required>
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" required>
+                <button type="submit">Create Recommendation</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Get a Recommendation by ID</h2>
+            <form action="/get" method="POST">
+                <label for="id">Recommendation ID:</label>
+                <input type="text" id="id" name="id" required>
+                <button type="submit">Get Recommendation</button>
+            </form>
+            {% if recommendation %}
+            <div class="result">
+                <h3>Recommendation Details</h3>
+                <p>Title: {{ recommendation.title }}</p>
+                <p>Artist: {{ recommendation.artist }}</p>
+                <p>Genre: {{ recommendation.genre }}</p>
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>Update a Recommendation</h2>
+            <form action="/update" method="POST">
+                <label for="id">Recommendation ID:</label>
+                <input type="text" id="id" name="id" required>
+                <label for="title">New Title:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="artist">New Artist:</label>
+                <input type="text" id="artist" name="artist" required>
+                <label for="genre">New Genre:</label>
+                <input type="text" id="genre" name="genre" required>
+                <button type="submit">Update Recommendation</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Delete a Recommendation</h2>
+            <form action="/delete" method="POST">
+                <label for="id">Recommendation ID:</label>
+                <input type="text" id="id" name="id" required>
+                <button type="submit">Delete Recommendation</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
